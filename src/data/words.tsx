@@ -698,7 +698,6 @@ const WORDS = {
 		ansioso: "Que denota inquietud, nerviosismo o deseo intenso.",
 		calmado: "Que denota tranquilidad, sosiego o paz.",
 		contento: "Que denota alegría, felicidad o satisfacción.",
-		deprimido: "Que denota tristeza, apatía o falta de energía.",
 		emocionado: "Que denota excitación, entusiasmo o afecto intenso.",
 		enojado: "Que denota irritación, ira o enfado.",
 		entusiasmado: "Que denota entusiasmo, euforia o ilusión.",
@@ -959,14 +958,15 @@ const WORDS = {
 };
 
 export const getRandomWord = () => {
-	let wordList: { category: string; word: string; normalizedWord: string; definition: string }[] = [];
+	let wordList: { category: string; value: string; normalizedValue: string; definition: string }[] = [];
 	for (const [category, words] of Object.entries(WORDS)) {
 		for (const [word, definition] of Object.entries(words)) {
 			wordList.push({
 				category: category,
-				word: word,
-				normalizedWord: word
+				value: word,
+				normalizedValue: word
 					.normalize("NFD")
+					.replace("\u006E\u0303", "\u00F1") // undo ñ decomposition
 					.replace(/\p{Diacritic}/gu, "")
 					.toLowerCase(),
 				definition: definition,
@@ -974,8 +974,5 @@ export const getRandomWord = () => {
 		}
 	}
 	const random = wordList[Math.floor(Math.random() * wordList.length)];
-
-	console.log(random);
-
 	return random;
 };
