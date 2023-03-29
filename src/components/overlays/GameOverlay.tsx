@@ -19,36 +19,37 @@ const GameOverlay = ({ isCompleted, isLoss }: IProps) => {
 
 	useEffect(() => {
 		if (didMount && !previousState?.isCompleted && isCompleted) {
-			setTrueTimeout(setShowCompleted, 3000);
-			setTimeout(() => {
-				setMessages(prev => ({ ...prev, success: getRandom(success) }));
-			}, 4000);
+			setTrueTimeout(setShowCompleted, 3000, 500).then(() =>
+				setMessages(prev => ({ ...prev, success: getRandom(success) }))
+			);
 		} else if (didMount && !previousState?.isLoss && isLoss) {
-			setTrueTimeout(setShowLoss, 3000);
-			setTimeout(() => {
-				setMessages(prev => ({ ...prev, fail: getRandom(fail) }));
-			}, 4000);
+			setTrueTimeout(setShowLoss, 3000, 500).then(() => setMessages(prev => ({ ...prev, fail: getRandom(fail) })));
 		}
 	}, [isCompleted, isLoss]);
 
 	return (
 		<div style={{ position: "absolute", width: "100vw", height: "100vh", zIndex: "100", pointerEvents: "none" }}>
 			<TextAnimation show={showCompleted} text={messages.success} lottieData={confettiData} />
-			<TextAnimation show={showLoss} text={messages.fail} lottieData={smokeData} />
+			<TextAnimation show={true} text={messages.fail} lottieData={smokeData} />
 		</div>
 	);
 };
 
-const setTrueTimeout = (dispatch: React.Dispatch<React.SetStateAction<boolean>>, timeout: number) => {
-	dispatch(true);
-	setTimeout(() => {
-		dispatch(false);
-	}, timeout);
-};
+const setTrueTimeout = (dispatch: React.Dispatch<React.SetStateAction<boolean>>, timeout: number, post = 0) =>
+	new Promise(resolve => {
+		dispatch(true);
+		setTimeout(resolve, timeout);
+	}).then(
+		() =>
+			new Promise(resolve => {
+				dispatch(false);
+				setTimeout(resolve, post);
+			})
+	);
 
 const success: string[][] = [
 	["¡Felicidades!"],
-	["¡Eres un campeón!"],
+	["¡Eres un", "campeón!"],
 	["¡Ganador!"],
 	["¡Lo lograste!"],
 	["¡Bravo!"],
@@ -61,22 +62,20 @@ const success: string[][] = [
 	["¡Genial!"],
 	["¡Asombroso!"],
 	["¡Victoria!"],
-	["¡Eres el mejor!"],
+	["¡Eres el", "mejor!"],
 	["¡Superaste", "el desafío!"],
 	["¡Eres imparable!"],
 	["¡Ganaste!"],
 ];
 
 const fail: string[][] = [
-	["Inténtalo de nuevo"],
+	["Inténtalo", "de nuevo"],
 	["Lo siento", "perdiste"],
 	["Vuelve a", "intentarlo"],
 	["No te rindas"],
-	["Prueba otra vez"],
+	["Prueba", "otra vez"],
 	["Mejor suerte", "la próxima"],
-	["No te desanimes"],
 	["Ups, fallaste"],
-	["No te preocupes", "sigue intentándolo"],
 	["Mala suerte"],
 	["Intentalo", "otra vez"],
 ];
