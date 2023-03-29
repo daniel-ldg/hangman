@@ -30,7 +30,7 @@ const GameOverlay = ({ isCompleted, isLoss }: IProps) => {
 	return (
 		<div style={{ position: "absolute", width: "100vw", height: "100vh", zIndex: "100", pointerEvents: "none" }}>
 			<TextAnimation show={showCompleted} text={messages.success} lottieData={confettiData} />
-			<TextAnimation show={true} text={messages.fail} lottieData={smokeData} />
+			<TextAnimation show={showLoss} text={messages.fail} lottieData={smokeData} />
 		</div>
 	);
 };
