@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export function useInterval(fn: () => void, interval: number) {
 	const [active, setActive] = useState(false);
 	const intervalRef = useRef<number>();
-	const fnRef = useRef<() => void>();
+	const fnRef = useRef<TimerHandler>();
 
 	useEffect(() => {
 		fnRef.current = fn;
@@ -11,7 +11,7 @@ export function useInterval(fn: () => void, interval: number) {
 
 	const start = () => {
 		setActive(old => {
-			if (!old && !intervalRef.current) {
+			if (!old && !intervalRef.current && fnRef.current) {
 				intervalRef.current = window.setInterval(fnRef.current, interval);
 			}
 			return true;
