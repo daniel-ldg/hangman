@@ -522,7 +522,6 @@ const WORDS = {
 		"montar en bicicleta": "Moverse sobre una bicicleta a través de la fuerza del pedaleo.",
 		"hacer yoga": "Practicar una disciplina física y mental que busca el equilibrio del cuerpo y la mente.",
 		"tocar un instrumento": "Producir música a través de la ejecución de un instrumento musical.",
-		"ver deportes": "Observar eventos deportivos, ya sea en vivo o por televisión.",
 		"hacer manualidades": "Crear objetos decorativos o utilitarios a mano.",
 		"visitar museos": "Explorar exhibiciones de arte, ciencia u otros temas en un museo.",
 		jardinería: "Cultivar plantas y flores en un jardín o huerto.",
