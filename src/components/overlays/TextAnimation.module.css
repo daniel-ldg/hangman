@@ -1,0 +1,22 @@
+.outerContainer {
+	position: relative;
+	width: 100vw;
+	max-width: 768px;
+	height: 100vh;
+	max-height: 768px;
+	aspect-ratio: 1/1;
+	margin: auto;
+}
+
+.innerContainer {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.char {
+	display: inline-block;
+	font-weight: 900;
+	text-shadow: 0 0 20px #ffffff;
+}
