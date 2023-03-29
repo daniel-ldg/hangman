@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@900");
+
 .outerContainer {
 	position: relative;
 	width: 100vw;
@@ -8,6 +10,10 @@
 	margin: auto;
 }
 
+.outerContainer svg {
+	scale: 1.5;
+}
+
 .innerContainer {
 	position: absolute;
 	left: 50%;
@@ -15,8 +21,14 @@
 	transform: translate(-50%, -50%);
 }
 
+.charContainer {
+	white-space: nowrap;
+}
+
 .char {
 	display: inline-block;
-	font-weight: 900;
-	text-shadow: 0 0 20px #ffffff;
+	font-family: "Noto Sans Display", sans-serif;
+	-webkit-text-stroke-width: 3.8px;
+	-webkit-text-stroke-color: #000000;
+	-webkit-text-fill-color: #ffffff;
 }

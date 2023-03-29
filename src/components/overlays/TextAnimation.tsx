@@ -31,7 +31,7 @@ const textAnimations: Variants = {
 		transition: {
 			delay: i * 0.05,
 			opacity: { duration: 0.5 },
-			y: { type: "spring", stiffness: 300, damping: 10, duration: 2 },
+			y: { type: "spring", stiffness: 300, damping: 8, duration: 2 },
 		},
 	}),
 };
@@ -39,7 +39,7 @@ const textAnimations: Variants = {
 const TextAnimation = ({ show, text, lottieData }: IProps) => {
 	const [isLottieVisible, setIsLottieVisible] = useState(false);
 	const isMobile = useIsMobile();
-	const fontSize = (isMobile ? 90 : 50) / text.reduce((prev, curr) => Math.max(prev, curr.length), 0);
+	const fontSize = (isMobile ? 120 : 70) / text.reduce((prev, curr) => Math.max(prev, curr.length), 0);
 
 	useEffect(() => (show ? setIsLottieVisible(true) : undefined), [show]);
 	return (
@@ -50,7 +50,7 @@ const TextAnimation = ({ show, text, lottieData }: IProps) => {
 			animate={show ? "shown" : "hidden"}>
 			<div className={clases.innerContainer}>
 				{text.map((phrase, i) => (
-					<div key={i}>
+					<div key={i} className={clases.charContainer}>
 						{phrase.split("").map((char, j, arr) => (
 							<motion.span
 								key={j}
@@ -70,7 +70,7 @@ const TextAnimation = ({ show, text, lottieData }: IProps) => {
 					autoplay: false,
 					animationData: lottieData,
 					rendererSettings: {
-						preserveAspectRatio: "xMidYMid slice",
+						preserveAspectRatio: "xMidYMid meet",
 					},
 				}}
 				isStopped={!show}
